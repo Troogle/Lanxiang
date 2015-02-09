@@ -1,6 +1,6 @@
 # Django settings for web project.
 import os
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -108,6 +108,7 @@ ROOT_URLCONF = 'settings.urls'
 WSGI_APPLICATION = 'settings.wsgi.application'
 
 TEMPLATE_DIRS = (
+    os.path.join(HERE, '../templates'),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -154,3 +155,9 @@ LOGGING = {
         },
     }
 }
+
+if os.path.exists(os.path.join(os.path.abspath(os.path.dirname(__file__)), "local_settings.py")):
+    import sys
+
+    sys.path.append(os.path.abspath(os.path.dirname(__file__)))
+    from local_settings import *
