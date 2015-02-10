@@ -1,14 +1,18 @@
 ﻿{% extends "base.html" %}
 {% block content %}
-    <div class="container">
+    <div class="bs-docs-masthead" id="content">
+      <div class="container">
       <img src="/static/img/logo.png"/>
       <h1>蓝翔杯</h1>
       <p class="lead">面向全体华人的一次Catch the Beat模式比赛
 </p>
       <p class="lead">
       <br/>
-      <a href="{% url 'rules' %}" class="btn btn-outline-inverse btn-lg">阅读规则</a>     
+      <a href="{% url 'rules' %}" class="btn btn-outline-inverse btn-lg">阅读规则</a>
       <a href="{% url 'register' %}" class="btn btn-outline-inverse btn-lg">我要报名</a>
       </p>
+      </div>
+    </div>
+    <div class="container">
     </div>
 {% endblock %}

@@ -23,6 +23,6 @@ def convertid(osuid):
 	raw = curl.urlopen('http://osu.ppy.sh/api/get_user?k=' + KEY + '&u=' + str(osuid)).read()
 	content = json.loads(raw.decode('utf-8'))
 	if len(content) != 0:
-		return content[0].get('user_id')
+		return content[0].get('user_id'),content[0].get('username')
 	else:
-		return -1
+		return -1,""
