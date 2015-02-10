@@ -10,7 +10,7 @@ def home(request):
 
 
 def rules(request):
-	return render(request, 'working.html', {'option': 0})
+	return render(request, 'rules.html', {'option': 0})
 
 
 def pool(request):

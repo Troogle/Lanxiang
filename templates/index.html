@@ -1,17 +1,33 @@
 ﻿{% extends "base.html" %}
 {% block content %}
     <div class="bs-docs-masthead" id="content">
-      <div class="container">
-      <img src="/static/img/logo.png"/>
-      <h1>蓝翔杯</h1>
-      <p class="lead">面向全体华人的一次Catch the Beat模式比赛
-</p>
-      <p class="lead">
-      <br/>
-      <a href="{% url 'rules' %}" class="btn btn-outline-inverse btn-lg">阅读规则</a>
-      <a href="{% url 'register' %}" class="btn btn-outline-inverse btn-lg">我要报名</a>
-      </p>
-      </div>
+        <div class="container">
+            <img src="/static/img/logo.png"/>
+
+            <h1>蓝翔杯</h1>
+
+            <p class="lead">面向全体华人的一次Catch the Beat模式比赛</p>
+
+            <p>官方QQ群：129614174</p>
+
+            <p>官方网站：<a href="/">http://ctb.troogle.pw</a></p>
+
+            <p>百度贴吧：
+            <ul>
+                <p>OSU吧：</p>
+
+                <p>CTB吧：</p>
+
+            </ul>
+            </p>
+            <p>            OSU论坛帖：            </p>
+            <br/>
+            <a href="{% url 'rules' %}" class="btn btn-outline-inverse btn-lg">阅读规则</a>
+            <button class="btn btn-outline-inverse btn-lg" data-toggle="modal"
+                    data-target="#register">我要报名
+            </button>
+            </p>
+        </div>
     </div>
     <div class="container">
     </div>
