@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>蓝翔杯</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/docs.min.css" rel="stylesheet">
+  </head>
+  <body class="bs-docs-home">
+    <a class="sr-only" href="#content">Skip to main content</a>
+    <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+          <a href="{% url 'home' %}" class="navbar-brand">蓝翔杯接水果大赛</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="{% url 'rules' %}">规则</a>
+            </li>
+            <li>
+              <a href="{% url 'pool' %}">图池</a>
+            </li>
+            <li>
+              <a href="{% url 'statistics' %}">比赛现状</a>
+            </li>
+            <li>
+              <a href="{% url 'staffs' %}">STAFF</a>
+            </li>
+            <li>
+              <a href="{% url 'support' %}">赞助</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'register' %}">我要报名</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="bs-docs-masthead" id="content" role="main">
+    {% block content %}
+    {% endblock %}
+    </main>
+  </body>
+</html>
