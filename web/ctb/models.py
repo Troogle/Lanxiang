@@ -17,6 +17,7 @@ class Beatmap(models.Model):
 class Match(models.Model):
 	mpid = models.IntegerField()
 	date = models.IntegerField()  # 人工输入，1-3，统计时取相同号的前6个
+	time = models.IntegerField()
 
 
 class Play(models.Model):
