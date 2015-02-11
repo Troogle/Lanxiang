@@ -1,6 +1,6 @@
 ﻿# Create your views here.
 from django.shortcuts import render
-from .utils import generate, checkcode, convertid
+from .utils import convertid
 from .response import JsonResponse
 from .models import *
 
@@ -14,11 +14,12 @@ def rules(request):
 
 
 def pool(request):
-	return render(request, 'working.html', {'option': 1})
+	return render(request, 'pool.html', {'option': 1})
 
 
 def statistics(request):
-	return render(request, 'working.html', {'option': 2})
+	user= MatchUser.objects.all()
+	return render(request, 'statistics.html', {'option': 2,'list':user})
 
 
 def staffs(request):
@@ -27,10 +28,6 @@ def staffs(request):
 
 def support(request):
 	return render(request, 'working.html', {'option': 4})
-
-
-def register(request):
-	return render(request, 'register.html', {'option': 5})
 
 
 def checkcode(request):

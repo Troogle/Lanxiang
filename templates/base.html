@@ -1,117 +1,124 @@
 ﻿<!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>蓝翔杯</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">#}
-    <link href="/static/css/docs.min.css" rel="stylesheet">#}
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    #}
+    <link href="/static/css/docs.min.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  </head>
-  <body role="document">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+</head>
+<body role="document">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="{% url 'home' %}" class="navbar-brand">蓝翔杯接水果大赛</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="{% url 'home' %}" class="navbar-brand">蓝翔杯接水果大赛</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li{% ifequal option 0 %} class="active"{% endifequal %}>
-              <a href="{% url 'rules' %}">规则</a>
-            </li>
-            <li{% ifequal option 1 %} class="active"{% endifequal %}>
-              <a href="{% url 'pool' %}">图池</a>
-            </li>
-            <li{% ifequal option 2 %} class="active"{% endifequal %}>
-              <a href="{% url 'statistics' %}">比赛现状</a>
-            </li>
-            <li{% ifequal option 3 %} class="active"{% endifequal %}>
-              <a href="{% url 'staffs' %}">STAFF</a>
-            </li>
-            <li{% ifequal option 4 %} class="active"{% endifequal %}>
-              <a href="{% url 'support' %}">赞助</a>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-default navbar-btn" data-toggle="modal"
-                    data-target="#register">我要报名</button>
-          </ul>
+            <ul class="nav navbar-nav">
+                <li{% ifequal option 0 %} class="active"{% endifequal %}>
+                    <a href="{% url 'rules' %}">规则</a>
+                </li>
+                <li{% ifequal option 1 %} class="active"{% endifequal %}>
+                    <a href="{% url 'pool' %}">图池</a>
+                </li>
+                <li{% ifequal option 2 %} class="active"{% endifequal %}>
+                    <a href="{% url 'statistics' %}">比赛现状</a>
+                </li>
+                <li{% ifequal option 3 %} class="active"{% endifequal %}>
+                    <a href="{% url 'staffs' %}">STAFF</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <button type="button" class="btn btn-default navbar-btn" data-toggle="modal"
+                        data-target="#register">我要报名
+                </button>
+            </ul>
         </div>
-      </div>
-    </nav>
-    {% block content %}
+    </div>
+</nav>
+{% block content %}
     <div class="container theme-showcase" role="main">
     </div>
-    {% endblock %}
-  <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="registerLabel">报名参加蓝翔杯</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="recipient-name" class="control-label">OSUID</label>
-            <input type="text" class="form-control" id="osuid" placeholder="输入osuid" required autofocus>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary ladda-button" id="registerButton" data-style="expand-left">
+{% endblock %}
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="registerLabel">报名参加蓝翔杯</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">OSUID</label>
+                        <input type="text" class="form-control" id="osuid" placeholder="输入osuid" required autofocus>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary ladda-button" id="registerButton" data-style="expand-left">
             <span class="ladda-label">
 					点击报名
 			</span>
-        </button>
-      </div>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <script src="/static/js/spin.js"></script>
 <script src="/static/js/ladda.js"></script>
-<link rel="stylesheet" type="text/css" href="/static/css/ladda-themeless.css" />
+<link rel="stylesheet" type="text/css" href="/static/css/ladda-themeless.css"/>
 <script>
-$(document).ready(function(){
-  var $registerButton = $('#registerButton');
-  $("#registerButton").click(function(){
-      var l = Ladda.create(this);
-        l.start();
-		l.setProgress( 0.1 );
-        var $osuid = $('#osuid').val();
-		$registerButton.find('.ladda-label').text('请稍等');
-        $.get('/register/getcode?id='+$osuid, function (response) {
-           if (JSON.parse(response).code==-1) {
-               l.setProgress( 1 );
-	           l.stop();
-               alert('已经报名过或者id输入不正确，请刷新页面后重试');
-               $registerButton.find('.ladda-label').text('报名失败');
-               $registerButton.removeClass("btn-primary");
-               $registerButton.addClass("btn-danger") ;
-               $registerButton.attr("disabled",true);
-           } else {
-               l.setProgress( 1 );
-	           l.stop();
-               $registerButton.find('.ladda-label').text('报名成功！');
-               $registerButton.removeClass("btn-primary");
-               $registerButton.addClass("btn-success") ;
-               $registerButton.attr("disabled",true);
-           }
-        }).fail(function (response) {
-            alert('网络连接中断。');
+    $(document).ready(function () {
+        var $registerButton = $('#registerButton');
+        $("#registerButton").click(function () {
+            var l = Ladda.create(this);
+            l.start();
+            l.setProgress(0.1);
+            var $osuid = $('#osuid').val();
+            $registerButton.find('.ladda-label').text('请稍等');
+            $.get('/register/getcode?id=' + $osuid,function (response) {
+                if (JSON.parse(response).code == -1) {
+                    alert('已经报名过或者id输入不正确，请刷新页面后重试');
+                    $registerButton.find('.ladda-label').text('报名失败');
+                    l.setProgress(1);
+                    l.stop();
+                    $registerButton.removeClass("btn-primary");
+                    $registerButton.addClass("btn-danger");
+                    $registerButton.attr("disabled", true);
+                } else {
+                    l.setProgress(1);
+                    l.stop();
+                    $registerButton.find('.ladda-label').text('报名成功！');
+                    $registerButton.removeClass("btn-primary");
+                    $registerButton.addClass("btn-success");
+                    $registerButton.attr("disabled", true);
+                }
+            }).fail(function (response) {
+                alert('网络连接中断。');
+            });
         });
-  });
-});
+        $('#register').on('hidden.bs.modal', function (e) {
+            $registerButton.find('.ladda-label').text('点击报名');
+            $registerButton.attr("class", "btn btn-primary ladda-button");
+            $registerButton.attr("disabled", false);
+            $('#osuid').val("");
+        })
+    });
 </script>
 </body>
 </html>
