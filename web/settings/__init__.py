@@ -1,7 +1,7 @@
 # Django settings for web project.
 import os
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 HERE = os.path.dirname(os.path.abspath(__file__))

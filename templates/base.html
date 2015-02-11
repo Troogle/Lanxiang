@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <link href="/static/css/docs.min.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
@@ -62,6 +63,17 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
+                      <label for="recipient-name" class="control-label">报名种别</label>
+                      <div class="btn-group reg-type" data-toggle="buttons">
+                          <label class="btn btn-primary active">
+                            <input type="radio" name="reg" id="player" autocomplete="off" checked> 玩家
+                          </label>
+                          <label class="btn btn-primary">
+                            <input type="radio" name="reg" id="judger" autocomplete="off"> 裁判
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group">
                         <label for="recipient-name" class="control-label">OSUID</label>
                         <input type="text" class="form-control" id="osuid" placeholder="输入osuid" required autofocus>
                     </div>
@@ -80,44 +92,7 @@
 </div>
 <script src="/static/js/spin.js"></script>
 <script src="/static/js/ladda.js"></script>
+<script type="text/javascript" src="/static/js/login.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/ladda-themeless.css"/>
-<script>
-    $(document).ready(function () {
-        var $registerButton = $('#registerButton');
-        $("#registerButton").click(function () {
-            var l = Ladda.create(this);
-            l.start();
-            l.setProgress(0.1);
-            var $osuid = $('#osuid').val();
-            $registerButton.find('.ladda-label').text('请稍等');
-            $.get('/register/getcode?id=' + $osuid,function (response) {
-                if (JSON.parse(response).code == -1) {
-                    alert('已经报名过或者id输入不正确，请刷新页面后重试');
-                    $registerButton.find('.ladda-label').text('报名失败');
-                    l.setProgress(1);
-                    l.stop();
-                    $registerButton.removeClass("btn-primary");
-                    $registerButton.addClass("btn-danger");
-                    $registerButton.attr("disabled", true);
-                } else {
-                    l.setProgress(1);
-                    l.stop();
-                    $registerButton.find('.ladda-label').text('报名成功！');
-                    $registerButton.removeClass("btn-primary");
-                    $registerButton.addClass("btn-success");
-                    $registerButton.attr("disabled", true);
-                }
-            }).fail(function (response) {
-                alert('网络连接中断。');
-            });
-        });
-        $('#register').on('hidden.bs.modal', function (e) {
-            $registerButton.find('.ladda-label').text('点击报名');
-            $registerButton.attr("class", "btn btn-primary ladda-button");
-            $registerButton.attr("disabled", false);
-            $('#osuid').val("");
-        })
-    });
-</script>
 </body>
 </html>
