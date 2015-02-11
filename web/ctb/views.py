@@ -23,7 +23,7 @@ def statistics(request):
 
 
 def staffs(request):
-	return render(request, 'working.html', {'option': 3})
+	return render(request, 'staffs.html', {'option': 3})
 
 
 def support(request):
