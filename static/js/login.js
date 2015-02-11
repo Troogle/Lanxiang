@@ -1,12 +1,19 @@
 $(document).ready(function() {
-    var $registerButton = $('#registerButton');
+    var $registerButton = $('#registerButton'),
+        // default 0 is player, 1 is judger
+        userType = 0,
+        me = this;
     $("#registerButton").click(function() {
         var l = Ladda.create(this);
         l.start();
         l.setProgress(0.1);
         var $osuid = $('#osuid').val();
+        var isPlayer = $('#player').prop('checked');
+        me.userType = isPlayer? 0 : 1;
+        console.log('userType:', me.userType );
+
         $registerButton.find('.ladda-label').text('请稍等');
-        $.get('/register/getcode?id=' + $osuid + '&type=13', function(response) {
+        $.get('/register/getcode?id=' + $osuid + '&type=' + me.userType, function(response) {
             if (JSON.parse(response).code == -1) {
                 alert('已经报名过或者id输入不正确，请刷新页面后重试');
                 $registerButton.find('.ladda-label').text('报名失败');
