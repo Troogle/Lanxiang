@@ -1,8 +1,9 @@
 ﻿{% extends "base.html" %}
 {% block content %}
     <script src="/static/js/jquery.tablesorter.min.js"></script>
+    <script src="/static/js/statistics.js"></script>
     <div class="container theme-showcase" role="main">
-        <table class="table table-striped table-hover table-bordered tablesorter">
+        <table id="playerTable" class="table table-striped table-hover table-bordered tablesorter">
             <caption>玩家列表</caption>
             <thead>
             <tr>
