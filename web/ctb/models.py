@@ -7,7 +7,11 @@ class MatchUser(models.Model):
 	username = models.CharField(max_length=30)
 	checked = models.BooleanField(default=False)
 	point = models.DecimalField(max_digits=10, decimal_places=7, default=0)
-	userType = models.IntegerField();
+	userType = models.IntegerField()
+
+	def __unicode__(self):
+		return self.username
+
 
 class Beatmap(models.Model):
 	diffid = models.IntegerField()
