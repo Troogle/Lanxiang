@@ -23,7 +23,7 @@
                 {% ifequal matchuser.userType 0 %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td style="width:128px"><img src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
+                    <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
                     </td>
                     <td style="color:
                             {% if matchuser.checked %}
