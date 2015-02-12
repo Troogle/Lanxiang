@@ -5,8 +5,12 @@
 
         <p>策划 规则制定 网站：<a href="https://osu.ppy.sh/u/3281474">Troogle</a></p>
             <p>规则制定：<a href="https://osu.ppy.sh/u/357232">Yes Sir Popesama </a></p>
-            <p>选图：<a href="https://osu.ppy.sh/u/260373">Xenophobia</a></p>
+            <p>选图 裁判：<a href="https://osu.ppy.sh/u/260373">Xenophobia</a>
+                <br>
+                <a href="https://osu.ppy.sh/u/1338103">Sakurano Kurimu</a></p>
             <p>裁判：暂缺</p>
+            <p>报名Staff: <br>
+                {% for matchuser in list %}{{ matchuser.username }}<br> {% endfor %}</p>
         </div>
     </div>
 {% endblock %}

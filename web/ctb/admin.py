@@ -14,6 +14,6 @@ class UserAdmin(admin.ModelAdmin):
     actions = [checkuser]
 
 admin.site.register(Match)
-admin.site.register(MatchUser,UserAdmin)
+admin.site.register(MatchUser, UserAdmin)
 admin.site.register(Beatmap)
 

@@ -5,12 +5,12 @@
     <script src="/static/js/dataTables.bootstrap.min.js"></script>
     <script src="/static/js/statistics.js"></script>
     <div class="container theme-showcase" role="main">
-        <table id="playerTable" class="table table-striped table-hover table-bordered tablesorter">
+        <table id="playerTable" class="table table-striped table-hover table-bordered">
             <caption>玩家列表</caption>
             <thead>
             <tr>
                 <th>#</th>
-                <th class="sorter-false">Avatar</th>
+                <th>Avatar</th>
                 <th>Username</th>
                 <th>Day 1</th>
                 <th>Day 2</th>
@@ -20,7 +20,6 @@
             </thead>
             <tbody>
             {% for matchuser in list %}
-                {% ifequal matchuser.userType 0 %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
@@ -32,7 +31,6 @@
 {#                    <td>{{ matchuser.point }}</td>#}
                 <td>0</td><td>0</td><td>0</td><td>0</td>
                 </tr>
-            {% endifequal %}
             {% endfor %}
             </tbody>
 

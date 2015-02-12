@@ -18,16 +18,13 @@ def pool(request):
 
 
 def statistics(request):
-	user= MatchUser.objects.all()
+	user= MatchUser.objects.filter(userType=0)
 	return render(request, 'statistics.html', {'option': 2,'list':user})
 
 
 def staffs(request):
-	return render(request, 'staffs.html', {'option': 3})
-
-
-def support(request):
-	return render(request, 'working.html', {'option': 4})
+	user= MatchUser.objects.filter(userType=1)
+	return render(request, 'staffs.html', {'option': 3,'list':user})
 
 
 def checkcode(request):

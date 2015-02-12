@@ -29,6 +29,9 @@ $(document).ready(function() {
                 $registerButton.removeClass("btn-primary");
                 $registerButton.addClass("btn-success");
                 $registerButton.attr("disabled", true);
+                setTimeout(function(){
+                    $('#register').modal('hide')
+                },1000)
             }
         }).fail(function(response) {
             alert('网络连接中断。');
