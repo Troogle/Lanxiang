@@ -33,8 +33,6 @@ def support(request):
 def checkcode(request):
 	userid = request.GET.get('id')
 	userType = request.GET.get('type')
-	print('userid = ' + userid)
-	print('userType = ' + userType)
 	if userid:
 		osuid, username = convertid(userid)
 		if osuid == -1:
