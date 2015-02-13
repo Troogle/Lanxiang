@@ -26,6 +26,9 @@ def staffs(request):
 	user= MatchUser.objects.filter(userType=1)
 	return render(request, 'staffs.html', {'option': 3,'list':user})
 
+def reward(request):
+	return render(request, 'reward.html', {'option': 4})
+
 
 def checkcode(request):
 	userid = request.GET.get('id')

@@ -9,6 +9,7 @@ urlpatterns = patterns('ctb',
 					   url(r'^pool/$', 'views.pool', name='pool'),
 					   url(r'^statistics/$', 'views.statistics', name='statistics'),
 					   url(r'^staffs/$', 'views.staffs', name='staffs'),
+					   url(r'^reward/$', 'views.reward', name='reward'),
 					   url(r'^register/getcode$', 'views.checkcode'),
 					   url(r'^admin/', include(admin.site.urls)),
 )

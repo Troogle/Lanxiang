@@ -11,6 +11,8 @@
     <link href="/static/css/main.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-image-gallery.min.css">
 </head>
 <body role="document">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -38,6 +40,9 @@
                 </li>
                 <li{% ifequal option 3 %} class="active"{% endifequal %}>
                     <a href="{% url 'staffs' %}">STAFF</a>
+                </li>
+                <li{% ifequal option 4 %} class="active"{% endifequal %}>
+                    <a href="{% url 'reward' %}">获奖名单</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -94,5 +99,7 @@
 <script src="/static/js/ladda.js"></script>
 <script type="text/javascript" src="/static/js/login.js"></script>
 <link rel="stylesheet" type="text/css" href="/static/css/ladda-themeless.css"/>
+<script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="/static/js/bootstrap-image-gallery.min.js"></script>
 </body>
 </html>
