@@ -27,7 +27,9 @@ def staffs(request):
 	return render(request, 'staffs.html', {'option': 3,'list':user})
 
 def reward(request):
-	return render(request, 'reward.html', {'option': 4})
+	user= MatchUser.objects.filter(userType=0)
+	newUser= user.order_by('point')[0:3]
+	return render(request, 'reward.html', {'option': 4, 'list':newUser})
 
 
 def checkcode(request):

@@ -21,19 +21,16 @@
 				<div class="modal-body next"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default pull-left prev">
-					<i class="glyphicon glyphicon-chevron-left"></i>
 					Previous
 					</button>
 					<button type="button" class="btn btn-primary next">
 					Next
-					<i class="glyphicon glyphicon-chevron-right"></i>
 					</button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 <div style="margin-top: 60px">
 	<form class="form-inline center-block">
 		<div class="form-group">
@@ -44,39 +41,21 @@
 	</form>
 </div>
 <div class="row">
+	{% for matchuser in list %}
 	<div class="col-sm-6 col-md-4">
 		<div class="thumbnail">
-			<img src="/static/img/1.jpg" alt="...">
+			<img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
 			<div class="caption">
-				<h3>第一名</h3>
-				<p>Sakurano Kurimu</p>
-				<p><a href="https://osu.ppy.sh/u/1338103" class="btn btn-primary" role="button">访问osu主页</a>
+				<p>{{ matchuser.username}}</p>
+				<p>{{ matchuser.point}}</p>
+				<p><a href="https://osu.ppy.sh/u/{{matchuser.osuid}}" class="btn btn-primary" role="button">访问osu主页</a>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
-			<img src="/static/img/2.jpg" alt="...">
-			<div class="caption">
-				<h3>第二名</h3>
-				<p>Xenophobia</p>
-				<p><a href="https://osu.ppy.sh/u/260373" class="btn btn-primary" role="button">访问osu主页</a>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6 col-md-4">
-		<div class="thumbnail">
-			<img src="/static/img/3.jpg" alt="...">
-			<div class="caption">
-				<h3>第三名</h3>
-				<p>Yes Sir Popesama</p>
-				<p><a href="https://osu.ppy.sh/u/357232" class="btn btn-primary" role="button">访问osu主页</a>
-			</div>
-		</div>
-	</div>
+	{% endfor %}
 </div>
 <div id="links">
-<a href="/static/img/2.jpg" title="Silver Xenophobia" data-gallery></a>
-<a href="/static/img/3.jpg" title="Bronze Yes Sir Popesama" data-gallery></a>
+	<a href="/static/img/2.jpg" title="Silver Xenophobia" data-gallery></a>
+	<a href="/static/img/3.jpg" title="Bronze Yes Sir Popesama" data-gallery></a>
 </div>
 {% endblock %}
