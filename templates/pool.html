@@ -8,28 +8,23 @@
     <div class="container theme-showcase" role="main">
         {% for daypool in list %}
         <table id="BeatmapTableDay{{ daypool.date }}" class="table table-striped table-hover table-bordered">
-            <caption>Day #{{ daypool.date }}</caption>
-            <thead>
-            <tr>
-                <th>Mode</th>
-                <th>Img</th>
-                <th>Mapname</th>
-                <th>Bloodcat</th>
-            </tr>
-            </thead>
+            <caption>Day #{{ daypool.date }} </caption>
             <tbody>
             {% for key,value in daypool.maps.items %}
                 {% for map in value %}
-                    <tr>
                     {% if forloop.first %}
-                    <td rowspan="{% ifequal key None %}4{% else %}3{% endifequal %}">{{ key }}</td>
+                    <tr><td colspan="4">{{ key }}</td></tr><tr>
                     {% endif %}
-                    <td><img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg" class="img-responsive">
+                    <td><a href="http://osu.ppy.sh/s/{{ map.diffid }}">
+                        <img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg" alt="{{ map.mapname }}">
+                        </a>
+                    <br>
+                       {{ map.diffname }}
+                       <br>
+                    <a href="http://bloodcat.com/m/{{ map.diffid }}">Download</a>
                     </td>
-                    <td><a href="http://osu.ppy.sh/s/{{ map.diffid }}">{{ map.mapname }}</a></td>
-                    <td><a href="http://bloodcat.com/m/{{ map.diffid }}">Download</a></td>
-                    </tr>
                 {% endfor %}
+                </tr>
             {% endfor %}
             </tbody>
         </table>

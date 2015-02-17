@@ -26,11 +26,12 @@ class Beatmap(models.Model):
 	diffid = models.IntegerField()
 	maxscore = models.IntegerField()
 	mapname = models.CharField(max_length=255, default='')
+	diffname = models.CharField(max_length=255, default='')
 	mode = models.CharField(choices=ModeChoice, max_length=10, default='None')
 	date = models.IntegerField(default=0)
-	def __unicode__(self):
-		return self.mapname+'Date:'+str(self.date)
 
+	def __unicode__(self):
+		return '(' + str(self.date) + ')' + self.mapname + '[' + self.diffname + ']'
 
 
 class Match(models.Model):
