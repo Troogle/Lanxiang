@@ -14,22 +14,31 @@ def rules(request):
 
 
 def pool(request):
-	return render(request, 'pool.html', {'option': 1})
+	maplist=[]
+	for date in range(1,5):
+		if Beatmap.objects.filter(date=date).count()==0 :
+			continue
+		data = {'date': date, 'maps': {'None': [], 'DT': [], 'HR': [], 'HD': [], 'Free Mod': []}}
+		for map in Beatmap.objects.filter(date=date):
+			data['maps'][map.mode].append(map)
+		maplist.append(data)
+	print(maplist)
+	return render(request, 'pool.html', {'option': 1,'list': maplist})
 
 
 def statistics(request):
 	user= MatchUser.objects.filter(userType=0)
-	return render(request, 'statistics.html', {'option': 2,'list':user})
+	return render(request, 'statistics.html', {'option': 2, 'list': user})
 
 
 def staffs(request):
 	user= MatchUser.objects.filter(userType=1)
-	return render(request, 'staffs.html', {'option': 3,'list':user})
+	return render(request, 'staffs.html', {'option': 3, 'list': user})
 
 def reward(request):
 	user= MatchUser.objects.filter(userType=0)
 	newUser= user.order_by('point')[0:3]
-	return render(request, 'reward.html', {'option': 4, 'list':newUser})
+	return render(request, 'reward.html', {'option': 4, 'list': newUser})
 
 
 def checkcode(request):

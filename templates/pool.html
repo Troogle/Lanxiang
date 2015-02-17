@@ -1,10 +1,40 @@
 ﻿{% extends "base.html" %}
 {% block content %}
+    <div>
+    <div>
+
+    </div>
+    </div>
     <div class="container theme-showcase" role="main">
-        <div class="jumbotron">
-        <h1>工事中。。。</h1>
-        <p>稍后更新</p>
-        </div>
-        <h1></h1>
+        {% for daypool in list %}
+        <table id="BeatmapTableDay{{ daypool.date }}" class="table table-striped table-hover table-bordered">
+            <caption>Day #{{ daypool.date }}</caption>
+            <thead>
+            <tr>
+                <th>Mode</th>
+                <th>Img</th>
+                <th>Mapname</th>
+                <th>Bloodcat</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key,value in daypool.maps.items %}
+                {% for map in value %}
+                    <tr>
+                    {% if forloop.first %}
+                    <td rowspan="{% ifequal key None %}4{% else %}3{% endifequal %}">{{ key }}</td>
+                    {% endif %}
+                    <td><img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg" class="img-responsive">
+                    </td>
+                    <td><a href="http://osu.ppy.sh/s/{{ map.diffid }}">{{ map.mapname }}</a></td>
+                    <td><a href="http://bloodcat.com/m/{{ map.diffid }}">Download</a></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% empty %}
+    <p>本轮图池将于2月18日公布</p>
+    {% endfor %}
     </div>
 {% endblock %}

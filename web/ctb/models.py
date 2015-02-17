@@ -13,15 +13,30 @@ class MatchUser(models.Model):
 		return self.username
 
 
+ModeChoice = (
+	('None', 'None'),
+	('HD', 'HD'),
+	('HR', 'HR'),
+	('DT', 'DT'),
+	('Free Mod', 'Free Mod')
+)
+
+
 class Beatmap(models.Model):
 	diffid = models.IntegerField()
 	maxscore = models.IntegerField()
+	mapname = models.CharField(max_length=255, default='')
+	mode = models.CharField(choices=ModeChoice, max_length=10, default='None')
+	date = models.IntegerField(default=0)
+	def __unicode__(self):
+		return self.mapname+'Date:'+str(self.date)
+
 
 
 class Match(models.Model):
 	mpid = models.IntegerField()
 	date = models.IntegerField()  # 人工输入，1-3，统计时取相同号的前6个
-	time = models.IntegerField()
+	time = models.IntegerField()  # 人工输入，1-4
 
 
 class Play(models.Model):
@@ -29,3 +44,4 @@ class Play(models.Model):
 	match = models.ForeignKey(Match)
 	score = models.IntegerField()
 	map = models.ForeignKey(Beatmap)
+	order = models.IntegerField(default=0)
