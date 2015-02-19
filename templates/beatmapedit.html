@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container theme-showcase" role="main">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="mapurl">DiffUrl</label>
+                <input type="text" class="form-control" name="mapurl" placeholder="http://osu.ppy.sh/b/x">
+            </div>
+            <div class="form-group">
+                <label for="date">Day</label>
+                <input type="text" class="form-control" name="date" value="1">
+            </div>
+            <div class="form-group">
+                <label for="mode">Mode</label>
+                <select name="mode" class="form-control">
+                    <option>None</option>
+                    <option>HD</option>
+                    <option>DT</option>
+                    <option>HR</option>
+                    <option>Free Mod</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Add Beatmap</button>
+        </form>
+    </div>
+{% endblock %}

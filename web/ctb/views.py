@@ -1,6 +1,7 @@
 ﻿# Create your views here.
 from django.shortcuts import render
-from .utils import convertid
+
+from .utils import *
 from .response import JsonResponse
 from .models import *
 
@@ -31,6 +32,20 @@ def pool(request):
 		maplist.append(data)
 	print(maplist)
 	return render(request, 'pool.html', {'option': 1, 'list': maplist})
+
+
+def beatmapedit(request):
+	if request.method == 'POST':
+		import re
+
+		mapurl = request.POST.get('mapurl')
+		mode = request.POST.get('mode')
+		date = request.POST.get('date')
+		diffid = re.match(r"https?://osu\.ppy\.sh/p/beatmap\?b=(\d+).*", mapurl).expand(r"\1")
+		setid, mapname, diffname = getmap(diffid)
+		map = Beatmap(diffid=setid, mapname=mapname, diffname=diffname, mode=mode, date=date, maxscore=0)
+		map.save()
+	return render(request, 'beatmapedit.html', {})
 
 
 def statistics(request):
