@@ -18,7 +18,7 @@ def pool(request):
 	from collections import OrderedDict
 
 	maplist = []
-	for date in range(1, 5):
+	for date in range(0, 1):
 		if Beatmap.objects.filter(date=date).count() == 0:
 			continue
 		data = {'date': date, 'maps': OrderedDict()}
