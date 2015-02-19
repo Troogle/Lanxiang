@@ -1,4 +1,6 @@
 ﻿# Create your views here.
+from datetime import datetime
+
 from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render
@@ -20,7 +22,9 @@ def pool(request):
 	from collections import OrderedDict
 
 	maplist = []
-	for date in range(0, 1):
+	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days + 1
+	timedelta = min(timedelta, 5)
+	for date in range(1, timedelta):
 		if Beatmap.objects.filter(date=date).count() == 0:
 			continue
 		data = {'date': date, 'maps': OrderedDict()}
@@ -32,8 +36,8 @@ def pool(request):
 		for map in Beatmap.objects.filter(date=date):
 			data['maps'][map.mode].append(map)
 		maplist.append(data)
-	print(maplist)
 	return render(request, 'pool.html', {'option': 1, 'list': maplist})
+
 
 @login_required
 def beatmapedit(request):
