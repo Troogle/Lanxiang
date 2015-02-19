@@ -1,4 +1,6 @@
 ﻿# Create your views here.
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render
 
 from .utils import *
@@ -33,7 +35,7 @@ def pool(request):
 	print(maplist)
 	return render(request, 'pool.html', {'option': 1, 'list': maplist})
 
-
+@login_required
 def beatmapedit(request):
 	if request.method == 'POST':
 		import re
