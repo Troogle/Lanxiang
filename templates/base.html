@@ -11,8 +11,6 @@
     <link href="/static/css/main.css" rel="stylesheet">
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="//blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-image-gallery.min.css">
 </head>
 <body role="document">
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -36,7 +34,7 @@
                     <a href="{% url 'pool' %}">图池</a>
                 </li>
                 <li{% ifequal option 2 %} class="active"{% endifequal %}>
-                    <a href="{% url 'statistics' %}">比赛现状</a>
+                    <a href="{% url 'statistics' %}">玩家列表</a>
                 </li>
                 <li{% ifequal option 3 %} class="active"{% endifequal %}>
                     <a href="{% url 'staffs' %}">STAFF</a>
@@ -56,6 +54,6 @@
     <div class="container theme-showcase" role="main">
     </div>
 {% endblock %}
-{% include login.html %}
+{#{% include "login.html" %}#}
 </body>
 </html>
