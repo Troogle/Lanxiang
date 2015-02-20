@@ -2,6 +2,8 @@ from hashlib import sha1 as sha_constructor
 import random
 import json
 
+from .models import *
+
 
 try:
 	from urllib import request as curl
@@ -39,3 +41,27 @@ def getmap(diffid):
 			   content[0].get('version')
 	else:
 		return -1, "", ""
+
+
+def addmatch(mpid, match):
+	raw = curl.urlopen('http://osu.ppy.sh/api/get_match?k=' + KEY + '&mp=' + str(mpid)).read()
+	content = json.loads(raw.decode('utf-8'))
+	if len(content) != 0:
+		content = content['games']
+		order = 0
+		for round in content:
+			setid, dummy, dummy = getmap(round['beatmap_id'])
+			cmap = Beatmap.objects.get(diffid=setid)
+			if cmap is None:
+				continue
+			cround = Round(Match=match, map=cmap, order=order)
+			cround.save()
+			order += 1
+			for play in round['scores']:
+				cplayer = MatchUser.objects.get(osuid=play['user_id'])
+				if cplayer is None:
+					continue
+				score = play['score']
+				failed = False if play['pass'] == '1' else True
+				cplay = Play(player=cplayer, round=cround, score=score, failed=failed)
+				cplay.save()

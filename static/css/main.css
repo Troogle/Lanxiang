@@ -1,12 +1,35 @@
 .reg-type {
-	margin-left: 5px;
+    margin-left: 5px;
 }
 
 .main-page-link {
-	color: rgba(255,255,255,0.7);
-	font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
 }
 
 .main-page-link:hover {
-	color: rgba(189, 247, 208, 0.7);
+    color: rgba(189, 247, 208, 0.7);
+}
+
+.mapdisplay {
+    display: -moz-box;
+    display: -webkit-box;
+    display: box;
+    text-align: center;
+}
+
+.mapimg {
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    text-align: right;
+}
+
+.mapdetail {
+    -moz-box-flex: 3;
+    -webkit-box-flex: 3;
+    box-flex: 3;
+    text-align: start;
+    margin-bottom: auto;
+    margin-top:auto;
 }

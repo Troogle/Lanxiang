@@ -4,24 +4,25 @@
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="mapurl">DiffUrl</label>
-                <input type="text" class="form-control" name="mapurl" placeholder="http://osu.ppy.sh/b/x">
-            </div>
-            <div class="form-group">
-                <label for="date">Day</label>
-                <input type="text" class="form-control" name="date" value="1">
-            </div>
-            <div class="form-group">
-                <label for="mode">Mode</label>
-                <select name="mode" class="form-control">
-                    <option>None</option>
-                    <option>HD</option>
-                    <option>DT</option>
-                    <option>HR</option>
-                    <option>Free Mod</option>
+                <label for="player">Player</label>
+                <select name="player" class="form-control">
+                    {% for player in players %}
+                        <option {% ifequal player play.player %} checked {% endifequal %}>
+                            {{ player }}
+                        </option>
+                    {% endfor %}
                 </select>
             </div>
-            <button type="submit" class="btn btn-default">Add Beatmap</button>
+            <div class="form-group">
+                <label for="score">Score</label>
+                <input type="text" class="form-control" name="score" value="{{ play.score }}">
+            </div>
+            <div class="form-group">
+                <label for="failed">Failed</label>
+                <input type="checkbox" class="form-control" name="failed"
+                       {% if play.failed %}checked{% endif %}>
+            </div>
+            <button type="submit" class="btn btn-default">Edit Play</button>
         </form>
     </div>
 {% endblock %}

@@ -1,39 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-    <link rel="stylesheet" href="/static/css/dataTables.bootstrap.css">
-    <script src="/static/js/jquery.dataTables.min.js"></script>
-    <script src="/static/js/dataTables.bootstrap.min.js"></script>
-    <script src="/static/js/statistics.js"></script>
     <div class="container theme-showcase" role="main">
-        <table id="playerTable" class="table table-striped table-hover table-bordered">
-            <caption>玩家列表</caption>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Avatar</th>
-                <th>Username</th>
-                <th>Day 1</th>
-                <th>Day 2</th>
-                <th>Day 3</th>
-                <th>Total Points</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for matchuser in list %}
-                <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
-                    </td>
-                    <td style="color:
-                            {% if matchuser.checked %}
-                                #333333{% else %}#dddddd
-                            {% endif %}">{{ matchuser.username }}</td>
-{#                    <td>{{ matchuser.point }}</td>#}
-                <td>0</td><td>0</td><td>0</td><td>0</td>
-                </tr>
+        {% for match in list %}
+            <h4>Day #{{ match.date }},Match #{{ match.time }}</h4>
+            {% for round in match.round_set.all %}
+                <table id="roundTable" class="table table-striped table-hover table-bordered">
+                    <caption>Round #{{ round.order }}</caption>
+                    <tr>
+                        <td colspan="5">
+                            <div class="mapdisplay">
+                                <div class="mapimg">
+                                    <a href="http://osu.ppy.sh/s/{{ map.diffid }}" target="_blank">
+                                        <img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg"
+                                             alt="{{ map.mapname }}">
+                                    </a>
+                                </div>
+                                <div class="mapdetail">
+                                    {{ map.mapname }}<br>
+                                    {{ map.diffname }}
+                                    <br>
+                                    MaxScore:{{ map.maxscore }}
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% for play in round.play_set.all %}
+                        <tr>
+                            <td><img style="max-width:32px;max-height:32px" src="http://a.ppy.sh/{{ play.player.osuid }}">
+                            <td>{{ play.player.username }}</td>
+                            <td>{{ play.score }}</td>
+                            <td>{% if play.failed %}Failed{% else %}Passed{% endif %}</td>
+                        <td>Point</td>
+                        </tr>
+                    {% endfor %}
+                </table>
             {% endfor %}
-            </tbody>
-
-        </table>
+        {% endfor %}
     </div>
 {% endblock %}

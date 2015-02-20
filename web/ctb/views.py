@@ -1,9 +1,11 @@
 ﻿# Create your views here.
 from datetime import datetime
+import re
+from collections import OrderedDict
 
 from django.contrib.auth.decorators import login_required
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .utils import *
 from .response import JsonResponse
@@ -19,8 +21,6 @@ def rules(request):
 
 
 def pool(request):
-	from collections import OrderedDict
-
 	maplist = []
 	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days + 1
 	timedelta = min(timedelta, 5)
@@ -42,7 +42,6 @@ def pool(request):
 @login_required
 def beatmapedit(request):
 	if request.method == 'POST':
-		import re
 		mapurl = request.POST.get('mapurl')
 		mode = request.POST.get('mode')
 		date = request.POST.get('date')
@@ -54,15 +53,33 @@ def beatmapedit(request):
 
 
 def matchlist(request):
-	match=Match.objects.all()
-	return render(request, 'matchlist.html', {'option': 5,'list':match})
+	match = Match.objects.all()
+	return render(request, 'matchlist.html', {'option': 5, 'list': match})
 
 
 def matchlistadd(request):
+	if request.method == 'POST':
+		matchurl = request.POST.get('matchurl')
+		date = request.POST.get('date')
+		time = request.POST.get('time')
+		mpid = re.match(r"https?://osu\.ppy\.sh/mp/(\d+)", matchurl).expand(r"\1")
+		match = Match(mpid=mpid, date=date, time=time)
+		match.save()
+		addmatch(mpid, match)
+		return redirect('ctb.views.matchlistedit', match_id=match.id)
 	return render(request, 'matchadd.html', {'option': 5})
 
-def matchlistedit(request):
-	return render(request, 'playedit.html', {'option': 5})
+
+def matchlistedit(request, match_id):
+	match = Match.objects.get(id=match_id)
+	return render(request, 'matchedit.html', {'option': 5, 'match': match})
+
+
+def playedit(request, play_id):
+	play = Play.objects.get(id=play_id)
+	players = MatchUser.objects.all()
+	return render(request, 'playedit.html', {'option': 5, 'play': play, 'players': players})
+
 
 def statistics(request):
 	user = MatchUser.objects.filter(userType=0)
