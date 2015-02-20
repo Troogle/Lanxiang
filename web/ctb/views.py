@@ -83,6 +83,15 @@ def matchlistedit(request, match_id):
 
 def playedit(request, play_id):
 	play = get_object_or_404(Play, id=play_id)
+	if request.method == 'POST':
+		playername = request.POST.get('player')
+		score = request.POST.get('score')
+		failed = True if request.POST.get('failed') else False
+		play.score = score
+		play.failed = failed
+		play.player = MatchUser.objects.get(username=playername)
+		play.save()
+		return redirect('ctb.views.matchlistedit', match_id=play.round.match.id)
 	players = MatchUser.objects.all()
 	return render(request, 'playedit.html', {'option': 5, 'play': play, 'players': players})
 

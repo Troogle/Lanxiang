@@ -1,5 +1,4 @@
 # coding=utf-8
-from decimal import Decimal as D
 
 from django.db import models
 
@@ -11,7 +10,12 @@ class Play(models.Model):
 	failed = models.BooleanField(default=False)
 
 	def __unicode__(self):
-		return str(self.round) + str(self.player)
+		return str(self.round) + " " + str(self.player)
+
+	@property
+	def point(self):
+		return float(self.score) / float(self.round.map.maxscore) \
+			if not self.failed else float(self.score) / float(2 * self.round.map.maxscore)
 
 
 class MatchUser(models.Model):
@@ -24,10 +28,12 @@ class MatchUser(models.Model):
 		return self.username
 
 	def getpoint(self, day):
-		plays = Play.objects.filter(round__match__date__exact=day).order_by('round__match__time', 'round__order')[:6]
-		point = D(0)
+		plays = Play.objects.filter(player=self,
+									round__match__date__exact=day).order_by('round__match__time',
+																			'round__order')[:6]
+		point = 0.0
 		for play in plays:
-			tpoint = D(play.score / play.round.map.maxscore)
+			tpoint = float(play.score) / float(play.round.map.maxscore)
 			if play.failed:
 				tpoint /= 2
 			point += tpoint
@@ -69,7 +75,7 @@ class Beatmap(models.Model):
 	date = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return '(' + str(self.date) + ')' + self.mapname + '[' + self.diffname + ']'
+		return '[Day:' + str(self.date) + ']' + self.mapname + '[' + self.diffname + ']'
 
 
 class Match(models.Model):
@@ -78,7 +84,7 @@ class Match(models.Model):
 	time = models.IntegerField()  # 人工输入，1-4
 
 	def __unicode__(self):
-		return '(' + str(self.date) + ')' + str(self.time)
+		return '[Day:' + str(self.date) + '/Time:' + str(self.time) + ']'
 
 	class Meta:
 		ordering = ['-date', '-time']
@@ -90,7 +96,7 @@ class Round(models.Model):
 	order = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return '[' + str(self.match) + ']' + str(self.order)
+		return str(self.match) + '#' + str(self.order)
 
 	class Meta:
 		ordering = ['order']

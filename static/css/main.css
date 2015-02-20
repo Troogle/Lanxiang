@@ -31,5 +31,10 @@
     box-flex: 3;
     text-align: start;
     margin-bottom: auto;
-    margin-top:auto;
+    margin-top: auto;
+}
+
+.avatars {
+    max-width: 32px;
+    max-height: 32px;
 }

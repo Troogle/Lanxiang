@@ -7,7 +7,7 @@
                 <label for="player">Player</label>
                 <select name="player" class="form-control">
                     {% for player in players %}
-                        <option {% ifequal player play.player %} checked {% endifequal %}>
+                        <option {% ifequal player play.player %} selected="selected" {% endifequal %}>
                             {{ player }}
                         </option>
                     {% endfor %}

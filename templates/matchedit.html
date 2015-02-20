@@ -9,32 +9,27 @@
                     <td colspan="5">
                         <div class="mapdisplay">
                             <div class="mapimg">
-                                <a href="http://osu.ppy.sh/b/{{ map.diffid }}" target="_blank">
-                                    <img src="http://b.ppy.sh/thumb/{{ map.setid }}l.jpg"
-                                         alt="{{ map.mapname }}">
+                                <a href="http://osu.ppy.sh/b/{{ round.map.diffid }}" target="_blank">
+                                    <img src="http://b.ppy.sh/thumb/{{ round.map.setid }}l.jpg"
+                                         alt="{{ round.map.mapname }}">
                                 </a>
                             </div>
                             <div class="mapdetail">
-                                {{ map.mapname }}<br>
-                                {{ map.diffname }}
+                                {{ round.map.mapname }}<br>
+                                {{ round.map.diffname }}
                                 <br>
-                                MaxScore:{{ map.maxscore }}
+                                MaxScore:{{ round.map.maxscore }}
                             </div>
                         </div>
                     </td>
                 </tr>
                 {% for play in round.play_set.all %}
                     <tr>
-                        <td><img style="max-width:32px;max-height:32px" src="http://a.ppy.sh/{{ play.player.osuid }}">
-                        <td><a href="{% url 'playedit' play.id %}" target="_blank">
-                            {{ play.player.username }}
-                        </a>
-                        </td>
-                        <td><a href="{% url 'playedit' play.id %}" target="_blank">
-                            {{ play.score }}
-                        </a></td>
+                        <td><img class="avatars" src="http://a.ppy.sh/{{ play.player.osuid }}">
+                        <td><a href="{% url 'playedit' play.id %}">{{ play.player.username }}</a></td>
+                        <td><a href="{% url 'playedit' play.id %}">{{ play.score }}</a></td>
                         <td>{% if play.failed %}Failed{% else %}Passed{% endif %}</td>
-                        <td>Point</td>
+                        <td>{{ play.point|floatformat:3 }}</td>
                     </tr>
                 {% endfor %}
             </table>

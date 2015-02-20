@@ -60,7 +60,7 @@ def addmatch(mpid, match):
 			cmap = get_object_or_none(Beatmap, diffid=round['beatmap_id'])
 			if cmap is None:
 				continue
-			cround = Round.objects.create(Match=match, map=cmap, order=order)
+			cround = Round.objects.create(match=match, map=cmap, order=order)
 			order += 1
 			for play in round['scores']:
 				cplayer = get_object_or_none(MatchUser, osuid=play['user_id'])
