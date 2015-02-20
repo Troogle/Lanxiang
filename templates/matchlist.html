@@ -3,7 +3,10 @@
     <div class="container theme-showcase" role="main">
         {% for match in list %}
             <h4>Day #{{ match.date }},Match #{{ match.time }}</h4>
+            <a href="https://osu.ppy.sh/mp/{{ match.mpid }}">mplink</a>
             {% for round in match.round_set.all %}
+                {% cycle '<div class="mapdisplay">' ''%}
+                <div class="mapimg">
                 <table id="roundTable" class="table table-striped table-hover table-bordered">
                     <caption>Round #{{ round.order }}</caption>
                     <tr>
@@ -39,6 +42,8 @@
                         </tr>
                     {% endfor %}
                 </table>
+                </div>
+                {% cycle '' '</div>' %}
             {% endfor %}
         {% empty %}
             <p>还木有比赛呢(⊙o⊙)</p>

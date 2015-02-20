@@ -30,13 +30,19 @@ class MatchUser(models.Model):
 	def getpoint(self, day):
 		plays = Play.objects.filter(player=self,
 									round__match__date__exact=day).order_by('round__match__time',
-																			'round__order')[:6]
+																			'round__order')
 		point = 0.0
+		uniquecheck=set([])
 		for play in plays:
+			if play.round.map.diffid in uniquecheck:
+				continue
+			uniquecheck.add(play.round.map.diffid)
 			tpoint = float(play.score) / float(play.round.map.maxscore)
 			if play.failed:
 				tpoint /= 2
 			point += tpoint
+			if len(uniquecheck)==6:
+				break
 		return point
 
 	@property
