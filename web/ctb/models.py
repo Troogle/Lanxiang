@@ -6,7 +6,7 @@ from django.db import models
 
 class Play(models.Model):
 	player = models.ForeignKey('MatchUser')
-	round = models.ForeignKey('Round',null=True)
+	round = models.ForeignKey('Round', null=True)
 	score = models.IntegerField()
 	failed = models.BooleanField(default=False)
 
@@ -34,8 +34,20 @@ class MatchUser(models.Model):
 		return point
 
 	@property
+	def point1(self):
+		return self.getpoint(1)
+
+	@property
+	def point2(self):
+		return self.getpoint(2)
+
+	@property
+	def point3(self):
+		return self.getpoint(3)
+
+	@property
 	def point(self):
-		return self.getpoint(1) + self.getpoint(2) + self.getpoint(3)
+		return self.point1 + self.point2 + self.point3
 
 
 ModeChoice = (
@@ -67,6 +79,9 @@ class Match(models.Model):
 	def __unicode__(self):
 		return '(' + str(self.date) + ')' + str(self.time)
 
+	class Meta:
+		ordering = ['-date', '-time']
+
 
 class Round(models.Model):
 	match = models.ForeignKey('Match')
@@ -75,3 +90,6 @@ class Round(models.Model):
 
 	def __unicode__(self):
 		return '[' + str(self.match) + ']' + str(self.order)
+
+	class Meta:
+		ordering = ['order']

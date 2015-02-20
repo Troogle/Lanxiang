@@ -17,7 +17,7 @@
                        {{ map.diffname }}
                        <br>
                     <a href="http://bloodcat.com/osu/m/{{ map.diffid }}">Download</a>
-                    <p>{% if map.maxscore %}{{ map.maxscore }}{% endif %}</p>
+                    <p>{% if map.maxscore %}MaxScore:{{ map.maxscore }}{% endif %}</p>
                     </td>
                 {% endfor %}
                 </tr>

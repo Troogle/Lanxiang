@@ -22,14 +22,17 @@
             {% for matchuser in list %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}" class="img-responsive">
+                    <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}"
+                             class="img-responsive">
                     </td>
                     <td style="color:
                             {% if matchuser.checked %}
                                 #333333{% else %}#dddddd
                             {% endif %}">{{ matchuser.username }}</td>
-{#                    <td>{{ matchuser.point }}</td>#}
-                <td>0</td><td>0</td><td>0</td><td>0</td>
+                    <td>{{ matchuser.point1 }}</td>
+                    <td>{{ matchuser.point2 }}</td>
+                    <td>{{ matchuser.point3 }}</td>
+                    <td>{{ matchuser.point }}</td>
                 </tr>
             {% endfor %}
             </tbody>

@@ -54,7 +54,8 @@ def beatmapedit(request):
 
 
 def matchlist(request):
-	return render(request, 'working.html', {'option': 5})
+	match=Match.objects.all()
+	return render(request, 'matchlist.html', {'option': 5,'list':match})
 
 
 def matchlistadd(request):
