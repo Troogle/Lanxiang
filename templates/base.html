@@ -36,6 +36,9 @@
                 <li{% ifequal option 2 %} class="active"{% endifequal %}>
                     <a href="{% url 'statistics' %}">玩家列表</a>
                 </li>
+                <li{% ifequal option 5 %} class="active"{% endifequal %}>
+                    <a href="{% url 'matchlist' %}">比赛记录</a>
+                </li>
                 <li{% ifequal option 3 %} class="active"{% endifequal %}>
                     <a href="{% url 'staffs' %}">STAFF</a>
                 </li>

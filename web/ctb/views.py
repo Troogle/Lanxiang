@@ -24,7 +24,7 @@ def pool(request):
 	maplist = []
 	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days + 1
 	timedelta = min(timedelta, 5)
-	for date in range(1, timedelta):
+	for date in range(timedelta, 0, -1):
 		if Beatmap.objects.filter(date=date).count() == 0:
 			continue
 		data = {'date': date, 'maps': OrderedDict()}
@@ -43,7 +43,6 @@ def pool(request):
 def beatmapedit(request):
 	if request.method == 'POST':
 		import re
-
 		mapurl = request.POST.get('mapurl')
 		mode = request.POST.get('mode')
 		date = request.POST.get('date')
@@ -52,6 +51,10 @@ def beatmapedit(request):
 		map = Beatmap(diffid=setid, mapname=mapname, diffname=diffname, mode=mode, date=date, maxscore=0)
 		map.save()
 	return render(request, 'beatmapedit.html', {})
+
+
+def matchlist(request):
+	return render(request, 'base.html', {'option': 5})
 
 
 def statistics(request):
