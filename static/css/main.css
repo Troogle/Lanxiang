@@ -15,23 +15,33 @@
     display: -moz-box;
     display: -webkit-box;
     display: box;
-    text-align: center;
 }
 
 .mapimg {
     -moz-box-flex: 1;
-    -webkit-box-flex: 1;
     box-flex: 1;
-    text-align: right;
 }
 
 .mapdetail {
-    -moz-box-flex: 3;
-    -webkit-box-flex: 3;
-    box-flex: 3;
-    text-align: start;
-    margin-bottom: auto;
-    margin-top: auto;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: horizontal;
+    display: -webkit-box;
+}
+
+.mapinfo {
+    margin-left: 18px;
+}
+
+.mapname {
+    margin-left: 20px;
+}
+
+.mapdif {
+    margin-left: 40px;
+}
+
+.mapscore {
+    margin-left: 26px;
 }
 
 .avatars {

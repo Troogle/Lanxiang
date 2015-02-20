@@ -15,11 +15,16 @@
                                              alt="{{ round.map.mapname }}">
                                     </a>
                                 </div>
-                                <div class="mapdetail">
-                                    {{ round.map.mapname }}<br>
-                                    {{ round.map.diffname }}
-                                    <br>
-                                    MaxScore:{{ round.map.maxscore }}
+                                <div class="mapinfo">
+                                    <div class="mapdetail">
+                                        Map Name: <div class="mapname">{{ round.map.mapname }}</div>
+                                    </div>
+                                    <div class="mapdetail">
+                                        Difficult: <div class="mapdif">{{ round.map.diffname }} </div>
+                                    </div>
+                                    <div class="mapdetail">
+                                        MaxScore: <div class="mapscore">{{ round.map.maxscore }} </div>
+                                    </div>
                                 </div>
                             </div>
                         </td>
