@@ -50,12 +50,18 @@ def beatmapedit(request):
 		setid, mapname, diffname = getmap(diffid)
 		map = Beatmap(diffid=setid, mapname=mapname, diffname=diffname, mode=mode, date=date, maxscore=0)
 		map.save()
-	return render(request, 'beatmapedit.html', {})
+	return render(request, 'beatmapedit.html', {'option': 1})
 
 
 def matchlist(request):
-	return render(request, 'base.html', {'option': 5})
+	return render(request, 'working.html', {'option': 5})
 
+
+def matchlistadd(request):
+	return render(request, 'matchadd.html', {'option': 5})
+
+def matchlistedit(request):
+	return render(request, 'playedit.html', {'option': 5})
 
 def statistics(request):
 	user = MatchUser.objects.filter(userType=0)
