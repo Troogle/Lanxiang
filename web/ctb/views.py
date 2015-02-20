@@ -49,6 +49,7 @@ def beatmapedit(request):
 		setid, mapname, diffname = getmap(diffid)
 		Beatmap.objects.create(
 			diffid=diffid,
+			setid=setid,
 			mapname=mapname,
 			diffname=diffname,
 			mode=mode,

@@ -15,4 +15,5 @@ admin.site.register(Match)
 admin.site.register(MatchUser, UserAdmin)
 admin.site.register(Beatmap)
 admin.site.register(Play)
+admin.site.register(Round)
 

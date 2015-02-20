@@ -10,8 +10,8 @@
                         <td colspan="5">
                             <div class="mapdisplay">
                                 <div class="mapimg">
-                                    <a href="http://osu.ppy.sh/s/{{ map.diffid }}" target="_blank">
-                                        <img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg"
+                                    <a href="http://osu.ppy.sh/b/{{ map.diffid }}" target="_blank">
+                                        <img src="http://b.ppy.sh/thumb/{{ map.setid }}l.jpg"
                                              alt="{{ map.mapname }}">
                                     </a>
                                 </div>
@@ -37,7 +37,7 @@
                 </table>
             {% endfor %}
         {% empty %}
-            <p>还木有比赛呢(⊙o⊙)</p>
+        <p>还木有比赛呢(⊙o⊙)</p>
         {% endfor %}
     </div>
 {% endblock %}

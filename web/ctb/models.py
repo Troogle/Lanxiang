@@ -61,6 +61,7 @@ ModeChoice = (
 
 class Beatmap(models.Model):
 	diffid = models.IntegerField()
+	setid = models.IntegerField(default=0)
 	maxscore = models.IntegerField()
 	mapname = models.CharField(max_length=255, default='')
 	diffname = models.CharField(max_length=255, default='')
