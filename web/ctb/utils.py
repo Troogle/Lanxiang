@@ -14,6 +14,13 @@ except ImportError:
 KEY = "69dd940656e10cfd73627625cb5a07bea5d2544b"
 
 
+def get_object_or_none(model, *args, **kwargs):
+	try:
+		return model.objects.get(*args, **kwargs)
+	except model.DoesNotExist:
+		return None
+
+
 def generate():
 	return sha_constructor(str(random.random())).hexdigest()[:8]
 
@@ -50,18 +57,15 @@ def addmatch(mpid, match):
 		content = content['games']
 		order = 0
 		for round in content:
-			setid, dummy, dummy = getmap(round['beatmap_id'])
-			cmap = Beatmap.objects.get(diffid=setid)
+			cmap = get_object_or_none(Beatmap, diffid=round['beatmap_id'])
 			if cmap is None:
 				continue
-			cround = Round(Match=match, map=cmap, order=order)
-			cround.save()
+			cround = Round.objects.create(Match=match, map=cmap, order=order)
 			order += 1
 			for play in round['scores']:
-				cplayer = MatchUser.objects.get(osuid=play['user_id'])
+				cplayer = get_object_or_none(MatchUser, osuid=play['user_id'])
 				if cplayer is None:
 					continue
 				score = play['score']
 				failed = False if play['pass'] == '1' else True
-				cplay = Play(player=cplayer, round=cround, score=score, failed=failed)
-				cplay.save()
+				Play.objects.create(player=cplayer, round=cround, score=score, failed=failed)

@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 from django.contrib.auth.decorators import login_required
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .utils import *
 from .response import JsonResponse
@@ -22,7 +22,7 @@ def rules(request):
 
 def pool(request):
 	maplist = []
-	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days + 1
+	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days
 	timedelta = min(timedelta, 5)
 	for date in range(timedelta, 0, -1):
 		if Beatmap.objects.filter(date=date).count() == 0:
@@ -47,8 +47,14 @@ def beatmapedit(request):
 		date = request.POST.get('date')
 		diffid = re.match(r"https?://osu\.ppy\.sh/p/beatmap\?b=(\d+).*", mapurl).expand(r"\1")
 		setid, mapname, diffname = getmap(diffid)
-		map = Beatmap(diffid=setid, mapname=mapname, diffname=diffname, mode=mode, date=date, maxscore=0)
-		map.save()
+		Beatmap.objects.create(
+			diffid=diffid,
+			mapname=mapname,
+			diffname=diffname,
+			mode=mode,
+			date=date,
+			maxscore=0
+		)
 	return render(request, 'beatmapedit.html', {'option': 1})
 
 
@@ -63,20 +69,19 @@ def matchlistadd(request):
 		date = request.POST.get('date')
 		time = request.POST.get('time')
 		mpid = re.match(r"https?://osu\.ppy\.sh/mp/(\d+)", matchurl).expand(r"\1")
-		match = Match(mpid=mpid, date=date, time=time)
-		match.save()
+		match = Match.objects.create(mpid=mpid, date=date, time=time)
 		addmatch(mpid, match)
 		return redirect('ctb.views.matchlistedit', match_id=match.id)
 	return render(request, 'matchadd.html', {'option': 5})
 
 
 def matchlistedit(request, match_id):
-	match = Match.objects.get(id=match_id)
+	match = get_object_or_404(Match, id=match_id)
 	return render(request, 'matchedit.html', {'option': 5, 'match': match})
 
 
 def playedit(request, play_id):
-	play = Play.objects.get(id=play_id)
+	play = get_object_or_404(Play, id=play_id)
 	players = MatchUser.objects.all()
 	return render(request, 'playedit.html', {'option': 5, 'play': play, 'players': players})
 
@@ -107,8 +112,7 @@ def checkcode(request):
 		else:
 			if MatchUser.objects.filter(osuid__exact=osuid):
 				return JsonResponse(code='-1')
-			tmp = MatchUser(osuid=osuid, username=username, userType=userType)
-			tmp.save()
+			MatchUser.objects.create(osuid=osuid, username=username, userType=userType)
 			return JsonResponse(code=0)
 	else:
 		return JsonResponse(code=-1)

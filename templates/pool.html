@@ -2,30 +2,34 @@
 {% block content %}
     <div class="container theme-showcase" role="main">
         {% for daypool in list %}
-        <table id="BeatmapTableDay{{ daypool.date }}" class="table table-striped table-hover table-bordered">
-            <caption>Day #{{ daypool.date }} </caption>
-            <tbody>
-            {% for key,value in daypool.maps.items %}
-                {% for map in value %}
-                    {% if forloop.first %}
-                    <tr><td colspan="4">{{ key }}</td></tr><tr>
-                    {% endif %}
-                    <td><a href="http://osu.ppy.sh/s/{{ map.diffid }}" target="_blank">
-                        <img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg" alt="{{ map.mapname }}">
+            <table id="BeatmapTableDay{{ daypool.date }}" class="table table-striped table-hover table-bordered">
+                <caption>Day #{{ daypool.date }} </caption>
+                <tbody>
+                {% for key,value in daypool.maps.items %}
+                    {% for map in value %}
+                        {% if forloop.first %}
+                            <tr>
+                                <td colspan="4">{{ key }}</td>
+                            </tr>
+                            <tr>
+                        {% endif %}
+                        <td><a href="http://osu.ppy.sh/s/{{ map.diffid }}" target="_blank">
+                            <img src="http://b.ppy.sh/thumb/{{ map.diffid }}l.jpg" alt="{{ map.mapname }}">
                         </a>
-                    <br>
-                       {{ map.diffname }}
-                       <br>
-                    <a href="http://bloodcat.com/osu/m/{{ map.diffid }}">Download</a>
-                    <p>{% if map.maxscore %}MaxScore:{{ map.maxscore }}{% endif %}</p>
-                    </td>
-                {% endfor %}
+                            <br>
+                            {{ map.diffname }}
+                            <br>
+                            <a href="http://bloodcat.com/osu/?q={{ map.diffid }}">Download</a>
+
+                            <p>{% if map.maxscore %}MaxScore:{{ map.maxscore }}{% endif %}</p>
+                        </td>
+                    {% endfor %}
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% empty %}
-    <p>本轮图池将于2月20日公布</p>
-    {% endfor %}
+                {% endfor %}
+                </tbody>
+            </table>
+        {% empty %}
+            <p>本轮图池将于2月20日公布</p>
+        {% endfor %}
     </div>
 {% endblock %}
