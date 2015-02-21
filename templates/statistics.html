@@ -9,8 +9,8 @@
             <caption>玩家列表</caption>
             <thead>
             <tr>
-                <th>#</th>
-                <th>Avatar</th>
+                <th class="width32">#</th>
+                <th class="width64">Avatar</th>
                 <th>Username</th>
                 <th>Day 1</th>
                 <th>Day 2</th>
@@ -21,14 +21,13 @@
             <tbody>
             {% for matchuser in list|dictsortreversed:"point" %}
                 <tr>
-                    <th scope="row">{{ forloop.counter }}</th>
-                    <td><img style="max-width:64px;max-height:64px" src="http://a.ppy.sh/{{ matchuser.osuid }}"
-                             class="img-responsive">
+                    <th class="width32">{{ forloop.counter }}</th>
+                    <td class="width64">
+                        <img class="avatar64 img-responsive" src="http://a.ppy.sh/{{ matchuser.osuid }}">
                     </td>
-                    <td style="color:
-                            {% if matchuser.checked %}
-                                #333333{% else %}#dddddd
-                            {% endif %}">{{ matchuser.username }}</td>
+                    <td color="{% if matchuser.checked %}#333333{% else %}#dddddd{% endif %}">
+                        {{ matchuser.username }}
+                    </td>
                     <td>{{ matchuser.point1|floatformat:3 }}</td>
                     <td>{{ matchuser.point2|floatformat:3 }}</td>
                     <td>{{ matchuser.point3|floatformat:3 }}</td>
@@ -36,7 +35,6 @@
                 </tr>
             {% endfor %}
             </tbody>
-
         </table>
     </div>
 {% endblock %}

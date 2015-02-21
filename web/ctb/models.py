@@ -8,9 +8,14 @@ class Play(models.Model):
 	round = models.ForeignKey('Round', null=True)
 	score = models.IntegerField()
 	failed = models.BooleanField(default=False)
+	useful = models.BooleanField(default=False)
 
 	def __unicode__(self):
 		return str(self.round) + " " + str(self.player)
+
+	def useit(self):
+		self.useful = True
+		self.save()
 
 	@property
 	def point(self):
@@ -27,22 +32,27 @@ class MatchUser(models.Model):
 	def __unicode__(self):
 		return self.username
 
-	def getpoint(self, day):
+	def calculatepoint(self, day):
 		plays = Play.objects.filter(player=self,
 									round__match__date__exact=day).order_by('round__match__time',
 																			'round__order')
-		point = 0.0
-		uniquecheck=set([])
+		plays.update(useful=False)
+		uniquecheck = set([])
 		for play in plays:
 			if play.round.map.diffid in uniquecheck:
 				continue
 			uniquecheck.add(play.round.map.diffid)
-			tpoint = float(play.score) / float(play.round.map.maxscore)
-			if play.failed:
-				tpoint /= 2
-			point += tpoint
-			if len(uniquecheck)==6:
+			play.useit()
+			if len(uniquecheck) == 6:
 				break
+
+	def getpoint(self, day):
+		plays = Play.objects.filter(player=self,
+									round__match__date__exact=day,
+									useful=True)
+		point = 0.0
+		for play in plays:
+			point += play.point
 		return point
 
 	@property
@@ -63,11 +73,11 @@ class MatchUser(models.Model):
 
 
 ModeChoice = (
-	('None', 'None'),
-	('HD', 'HD'),
-	('HR', 'HR'),
-	('DT', 'DT'),
-	('Free Mod', 'Free Mod')
+		('None', 'None'),
+		('HD', 'HD'),
+		('HR', 'HR'),
+		('DT', 'DT'),
+		('Free Mod', 'Free Mod')
 )
 
 

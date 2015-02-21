@@ -18,33 +18,31 @@
 }
 
 .mapimg {
-    -moz-box-flex: 1;
-    box-flex: 1;
+
 }
 
 .mapdetail {
-    -webkit-box-flex: 1;
-    -webkit-box-orient: horizontal;
-    display: -webkit-box;
+    margin-left: 40px;
 }
 
 .mapinfo {
     margin-left: 18px;
 }
 
-.mapname {
-    margin-left: 20px;
-}
-
-.mapdif {
-    margin-left: 40px;
-}
-
-.mapscore {
-    margin-left: 26px;
-}
-
 .avatars {
     max-width: 32px;
     max-height: 32px;
+}
+
+.avatar64 {
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.width32 {
+    width: 32px;
+}
+
+.width64 {
+    width: 64px;
 }

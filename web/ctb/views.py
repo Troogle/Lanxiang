@@ -72,6 +72,8 @@ def matchlistadd(request):
 		mpid = re.match(r"https?://osu\.ppy\.sh/mp/(\d+)", matchurl).expand(r"\1")
 		match = Match.objects.create(mpid=mpid, date=date, time=time)
 		addmatch(mpid, match)
+		for user in MatchUser.objects.all():
+			user.calculatepoint(date)
 		return redirect('ctb.views.matchlistedit', match_id=match.id)
 	return render(request, 'matchadd.html', {'option': 5})
 
@@ -87,9 +89,11 @@ def playedit(request, play_id):
 		playername = request.POST.get('player')
 		score = request.POST.get('score')
 		failed = True if request.POST.get('failed') else False
+		play.player.calculatepoint(play.round.match.date)
 		play.score = score
 		play.failed = failed
 		play.player = MatchUser.objects.get(username=playername)
+		play.player.calculatepoint(play.round.match.date)
 		play.save()
 		return redirect('ctb.views.matchlistedit', match_id=play.round.match.id)
 	players = MatchUser.objects.all()

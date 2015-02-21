@@ -3,36 +3,50 @@
     <div class="container theme-showcase" role="main">
         <h4>Day #{{ match.date }},Match #{{ match.time }}</h4>
         {% for round in match.round_set.all %}
-            <table id="roundTable" class="table table-striped table-hover table-bordered">
-                <caption>Round #{{ round.order }}</caption>
-                <tr>
-                    <td colspan="5">
-                        <div class="mapdisplay">
-                            <div class="mapimg">
-                                <a href="http://osu.ppy.sh/b/{{ round.map.diffid }}" target="_blank">
-                                    <img src="http://b.ppy.sh/thumb/{{ round.map.setid }}l.jpg"
-                                         alt="{{ round.map.mapname }}">
-                                </a>
-                            </div>
-                            <div class="mapdetail">
-                                {{ round.map.mapname }}<br>
-                                {{ round.map.diffname }}
-                                <br>
-                                MaxScore:{{ round.map.maxscore }}
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                {% for play in round.play_set.all %}
+            {% cycle '<div class="row">' '' %}
+            <div class="col-md-6">
+                <table id="roundTable" class="table table-striped table-hover table-bordered">
+                    <caption>Round #{{ round.order|add:'1' }}</caption>
                     <tr>
-                        <td><img class="avatars" src="http://a.ppy.sh/{{ play.player.osuid }}">
-                        <td><a href="{% url 'playedit' play.id %}">{{ play.player.username }}</a></td>
-                        <td><a href="{% url 'playedit' play.id %}">{{ play.score }}</a></td>
-                        <td>{% if play.failed %}Failed{% else %}Passed{% endif %}</td>
-                        <td>{{ play.point|floatformat:3 }}</td>
+                        <td colspan="5">
+                            <div class="mapdisplay">
+                                <div>
+                                    <a href="http://osu.ppy.sh/b/{{ round.map.diffid }}" target="_blank">
+                                        <img src="http://b.ppy.sh/thumb/{{ round.map.setid }}l.jpg"
+                                             alt="{{ round.map.mapname }}">
+                                    </a>
+                                </div>
+                                <div class="mapinfo">
+                                    <div>
+                                        Map Name:
+                                        <div class="mapdetail">{{ round.map.mapname }}</div>
+                                    </div>
+                                    <div>
+                                        Difficulty:
+                                        <div class="mapdetail">{{ round.map.diffname }} </div>
+                                    </div>
+                                    <div>
+                                        MaxScore:
+                                        <div class="mapdetail">{{ round.map.maxscore }} </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
-                {% endfor %}
-            </table>
+                    {% for play in round.play_set.all %}
+                        <tr>
+                            <td class="width32"><img class="avatars" src="http://a.ppy.sh/{{ play.player.osuid }}">
+                            <td><a href="{% url 'playedit' play.id %}">{{ play.player.username }}</a></td>
+                            <td><a href="{% url 'playedit' play.id %}">{{ play.score }}</a></td>
+                            <td class="{% if play.failed %}danger">Failed{% else %}success">Passed{% endif %}</td>
+                            <td class="{% if play.useful %}success{% else %}danger{% endif %}">
+                                {{ play.point|floatformat:3 }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% cycle '' '</div>' %}
         {% endfor %}
     </div>
 {% endblock %}
