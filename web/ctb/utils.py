@@ -53,19 +53,20 @@ def getmap(diffid):
 def addmatch(mpid, match):
 	raw = curl.urlopen('http://osu.ppy.sh/api/get_match?k=' + KEY + '&mp=' + str(mpid)).read()
 	content = json.loads(raw.decode('utf-8'))
-	if len(content) != 0:
-		content = content['games']
-		order = 0
-		for round in content:
-			cmap = get_object_or_none(Beatmap, diffid=round['beatmap_id'])
-			if cmap is None:
+	if len(content) == 0:
+		return
+	content = content['games']
+	order = 0
+	for round in content:
+		cmap = get_object_or_none(Beatmap, diffid=round['beatmap_id'])
+		if cmap is None:
+			continue
+		cround = Round.objects.create(match=match, map=cmap, order=order)
+		order += 1
+		for play in round['scores']:
+			cplayer = get_object_or_none(MatchUser, osuid=play['user_id'])
+			if cplayer is None:
 				continue
-			cround = Round.objects.create(match=match, map=cmap, order=order)
-			order += 1
-			for play in round['scores']:
-				cplayer = get_object_or_none(MatchUser, osuid=play['user_id'])
-				if cplayer is None:
-					continue
-				score = play['score']
-				failed = False if play['pass'] == '1' else True
-				Play.objects.create(player=cplayer, round=cround, score=score, failed=failed)
+			score = play['score']
+			failed = False if play['pass'] == '1' else True
+			Play.objects.create(player=cplayer, round=cround, score=score, failed=failed)
