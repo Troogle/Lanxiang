@@ -22,6 +22,9 @@ class Play(models.Model):
 		return float(self.score) / float(self.round.map.maxscore) \
 			if not self.failed else float(self.score) / float(2 * self.round.map.maxscore)
 
+	class Meta:
+		ordering = ['-score']
+
 
 class MatchUser(models.Model):
 	osuid = models.IntegerField()
