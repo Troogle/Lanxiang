@@ -18,7 +18,7 @@
 }
 
 .mapimg {
-
+    width:160px;
 }
 
 .mapdetail {
@@ -27,6 +27,11 @@
 
 .mapinfo {
     margin-left: 18px;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    box-flex: 1;
+
 }
 
 .avatars {
