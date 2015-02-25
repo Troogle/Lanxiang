@@ -117,7 +117,7 @@ def staffs(request):
 
 def reward(request):
 	user = MatchUser.objects.filter(userType=0)
-	newUser = user.order_by('point')[0:3]
+	newUser = sorted(user, key=lambda a: -a.pointFinal)[:3]
 	return render(request, 'reward.html', {'option': 4, 'list': newUser})
 
 
