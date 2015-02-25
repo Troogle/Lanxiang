@@ -69,8 +69,9 @@ def addmatch(mpid, match):
 			if cplayer is None:
 				continue
 			score = play['score']
+			team = play['team']
 			failed = False if play['pass'] == '1' else True
-			Play.objects.create(player=cplayer, round=cround, score=score, failed=failed)
+			Play.objects.create(player=cplayer, round=cround, score=score, failed=failed, team=team)
 
 
 def PackMapData(date):

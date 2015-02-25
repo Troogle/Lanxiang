@@ -8,12 +8,25 @@
                 <input type="text" class="form-control" name="matchurl" placeholder="http://osu.ppy.sh/mp/xxxx">
             </div>
             <div class="form-group">
-                <label for="date">Day(1-3)</label>
+                <label for="date">Day(1-3,淘汰赛,决赛)</label>
                 <input type="text" class="form-control" name="date" value="1">
             </div>
             <div class="form-group">
                 <label for="time">Time(1-4)</label>
                 <input type="text" class="form-control" name="time" value="1">
+            </div>
+            <div class="form-group">
+                <label for="group">Group(小组赛的时候再选上)</label>
+                <input type="checkbox" class="form-control" name="group" data-toggle="collapse"
+                       data-target="#teamwin">
+            </div>
+            <div class="form-group collapse" id="teamwin">
+                <label for="group">最后获胜队伍</label>
+                <select name="group" class="form-control">
+                    <option>空</option>
+                    <option>Blue</option>
+                    <option>Red</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-default">Add Match</button>
         </form>

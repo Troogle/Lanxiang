@@ -9,6 +9,7 @@ class Play(models.Model):
 	score = models.IntegerField()
 	failed = models.BooleanField(default=False)
 	useful = models.BooleanField(default=False)
+	team = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return str(self.round) + " " + str(self.player)
@@ -19,6 +20,8 @@ class Play(models.Model):
 
 	@property
 	def point(self):
+		if self.team:
+			return 1 if self.useful else 0
 		return float(self.score) / float(self.round.map.maxscore) \
 			if not self.failed else float(self.score) / float(2 * self.round.map.maxscore)
 
@@ -75,14 +78,26 @@ class MatchUser(models.Model):
 	def point(self):
 		return self.point1 + self.point2 + self.point3
 
+	@property
+	def pointT(self):
+		return self.getpoint('淘汰赛')
+
+	@property
+	def pointF(self):
+		return self.getpoint('决赛')
+
+	@property
+	def pointFinal(self):
+		return self.point + self.pointT + self.pointF
+
 
 ModeChoice = (
-		('None', 'None'),
-		('HD', 'HD'),
-		('HR', 'HR'),
-		('DT', 'DT'),
-		('Free Mod', 'Free Mod'),
-		('Tie Breaker', 'Tie Breaker')
+('None', 'None'),
+('HD', 'HD'),
+('HR', 'HR'),
+('DT', 'DT'),
+('Free Mod', 'Free Mod'),
+('Tie Breaker', 'Tie Breaker')
 )
 
 

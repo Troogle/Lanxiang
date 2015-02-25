@@ -68,8 +68,17 @@ def matchlistadd(request):
 		mpid = re.match(r"https?://osu\.ppy\.sh/mp/(\d+)", matchurl).expand(r"\1")
 		match = Match.objects.create(mpid=mpid, date=date, time=time)
 		addmatch(mpid, match)
-		for user in MatchUser.objects.all():
-			user.calculatepoint(date)
+		if request.POST.get('group'):
+			team = request.POST.get('teamwin')
+			if team == "Blue":
+				team = "1"
+			elif team == "Red":
+				team = "2"
+			plays = Play.objects.filter(round__match__date__exact=date, team=team)
+			plays.update(useful=True)
+		else:
+			for user in MatchUser.objects.all():
+				user.calculatepoint(date)
 		return redirect('ctb.views.matchlistedit', match_id=match.id)
 	return render(request, 'matchadd.html', {'option': 5})
 
