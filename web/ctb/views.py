@@ -1,4 +1,4 @@
-﻿# Create your views here.
+﻿# coding=utf-8
 from datetime import datetime
 import re
 
@@ -20,9 +20,9 @@ def rules(request):
 
 def pool(request):
 	maplist = []
-	data = PackMapData('淘汰赛')
+	data = PackMapData('决赛')
 	maplist.append(data)
-	data = PackMapData('小组赛')
+	data = PackMapData('淘汰赛')
 	maplist.append(data)
 	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days
 	timedelta = min(timedelta, 3)

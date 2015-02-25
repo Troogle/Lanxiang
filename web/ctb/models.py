@@ -94,7 +94,7 @@ class Beatmap(models.Model):
 	date = models.CharField(max_length=20, default=0)
 
 	def __unicode__(self):
-		return '[Day:' + str(self.date) + ']' + self.mapname + '[' + self.diffname + ']'
+		return '[Day:' + unicode(self.date) + ']' + self.mapname + '[' + self.diffname + ']'
 
 
 class Match(models.Model):
@@ -103,7 +103,7 @@ class Match(models.Model):
 	time = models.IntegerField()  # 人工输入，1-4
 
 	def __unicode__(self):
-		return '[Day:' + str(self.date) + '/Time:' + str(self.time) + ']'
+		return '[Day:' + unicode(self.date) + '/Time:' + str(self.time) + ']'
 
 	class Meta:
 		ordering = ['-date', '-time']
