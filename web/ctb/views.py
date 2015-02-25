@@ -134,6 +134,11 @@ def statistics(request):
 	return render(request, 'statistics.html', {'option': 2, 'list': user})
 
 
+def statisticsfull(request):
+	user = MatchUser.objects.filter(userType=0)
+	return render(request, 'statistics.html', {'option': 2, 'list': user, 'full': True})
+
+
 def staffs(request):
 	user = MatchUser.objects.filter(userType=1)
 	return render(request, 'staffs.html', {'option': 3, 'list': user})

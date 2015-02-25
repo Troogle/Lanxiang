@@ -88,7 +88,11 @@ class MatchUser(models.Model):
 
 	@property
 	def pointFinal(self):
-		return self.point + self.pointT + self.pointF
+		plays = Play.objects.filter(player=self,useful=True)
+		point = 0.0
+		for play in plays:
+			point += play.point
+		return point
 
 
 ModeChoice = (
