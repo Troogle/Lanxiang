@@ -20,10 +20,12 @@ def rules(request):
 
 def pool(request):
 	maplist = []
-	data = PackMapData('决赛')
-	maplist.append(data)
-	data = PackMapData('淘汰赛')
-	maplist.append(data)
+	if datetime.now() > datetime(year=2015, month=2, day=27):
+		data = PackMapData('决赛')
+		maplist.append(data)
+	if datetime.now() > datetime(year=2015, month=2, day=26):
+		data = PackMapData('淘汰赛')
+		maplist.append(data)
 	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days
 	timedelta = min(timedelta, 3)
 	for date in range(timedelta, 0, -1):
@@ -38,7 +40,8 @@ def beatmapedit(request):
 		mapurl = request.POST.get('mapurl')
 		mode = request.POST.get('mode')
 		date = request.POST.get('date')
-		diffid = re.match(r"https?://osu\.ppy\.sh/p/beatmap\?b=(\d+).*", mapurl).expand(r"\1")
+		diffid = re.match(r"https?://osu\.ppy\.sh/(p/beatmap\?b=|b/)(?P<mapid>\d+).*"
+						  , mapurl).expand(r"\g<mapid>")
 		setid, mapname, diffname = getmap(diffid)
 		Beatmap.objects.create(
 			diffid=diffid,

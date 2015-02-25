@@ -15,7 +15,9 @@
                 <th>Day 1</th>
                 <th>Day 2</th>
                 <th>Day 3</th>
-                <th>Total Points</th>
+                <th>Total</th>
+                <th>淘汰赛</th>
+                <th>决赛</th>
             </tr>
             </thead>
             <tbody>
@@ -32,6 +34,11 @@
                     <td>{{ matchuser.point2|floatformat:3 }}</td>
                     <td>{{ matchuser.point3|floatformat:3 }}</td>
                     <td>{{ matchuser.point|floatformat:3 }}</td>
+                    <td class="{% ifequal matchuser.team 1 %}info{% endifequal %}
+                    {% ifequal matchuser.team 2 %}success{% endifequal %}">
+                        0
+                    </td>
+                    <td>0</td>
                 </tr>
             {% endfor %}
             </tbody>

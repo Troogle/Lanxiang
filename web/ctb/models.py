@@ -31,6 +31,7 @@ class MatchUser(models.Model):
 	username = models.CharField(max_length=30)
 	checked = models.BooleanField(default=False)
 	userType = models.IntegerField()
+	team = models.IntegerField(default=-1)
 
 	def __unicode__(self):
 		return self.username
