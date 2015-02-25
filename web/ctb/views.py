@@ -3,6 +3,7 @@ from datetime import datetime
 import re
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .utils import *
@@ -19,6 +20,24 @@ def rules(request):
 
 
 def pool(request):
+	maplist = []
+	if datetime.now() > datetime(year=2015, month=2, day=27):
+		data = PackMapData('决赛')
+		maplist.append(data)
+		return render(request, 'pool.html', {'option': 1, 'list': maplist})
+	if datetime.now() > datetime(year=2015, month=2, day=26):
+		data = PackMapData('淘汰赛')
+		maplist.append(data)
+		return render(request, 'pool.html', {'option': 1, 'list': maplist})
+	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days
+	timedelta = min(timedelta, 3)
+	for date in range(timedelta, 0, -1):
+		data = PackMapData(date)
+		maplist.append(data)
+	return render(request, 'pool.html', {'option': 1, 'list': maplist})
+
+
+def poolall(request):
 	maplist = []
 	if datetime.now() > datetime(year=2015, month=2, day=27):
 		data = PackMapData('决赛')
@@ -56,7 +75,12 @@ def beatmapedit(request):
 
 
 def matchlist(request):
-	match = Match.objects.all()
+	match = Match.objects.filter(Q(date='淘汰赛') | Q(date='决赛'))
+	return render(request, 'matchlist.html', {'option': 5, 'list': match})
+
+
+def matchlistold(request):
+	match = Match.objects.exclude(Q(date='淘汰赛') | Q(date='决赛'))
 	return render(request, 'matchlist.html', {'option': 5, 'list': match})
 
 

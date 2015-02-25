@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="container theme-showcase" role="main">
+        <a href="{% url 'matchlistold' %}">积分赛比赛记录</a>
         {% for match in list %}
             <h4>Day #{{ match.date }},Match #{{ match.time }}</h4>
             <a href="https://osu.ppy.sh/mp/{{ match.mpid }}">mplink</a>
