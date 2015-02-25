@@ -2,7 +2,6 @@ from collections import OrderedDict
 from hashlib import sha1 as sha_constructor
 import random
 import json
-from ctb.models import Beatmap
 
 from .models import *
 
@@ -83,6 +82,8 @@ def PackMapData(date):
 	data['maps']['DT'] = []
 	data['maps']['HR'] = []
 	data['maps']['Free Mod'] = []
+	if Beatmap.objects.filter(date=date, mode="Tie Breaker").count() != 0:
+		data['maps']['Tie Breaker'] = []
 	for map in Beatmap.objects.filter(date=date):
 		data['maps'][map.mode].append(map)
 	return data

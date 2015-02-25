@@ -81,7 +81,8 @@ ModeChoice = (
 		('HD', 'HD'),
 		('HR', 'HR'),
 		('DT', 'DT'),
-		('Free Mod', 'Free Mod')
+		('Free Mod', 'Free Mod'),
+		('Tie Breaker', 'Tie Breaker')
 )
 
 
