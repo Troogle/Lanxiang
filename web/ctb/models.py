@@ -91,7 +91,7 @@ class Beatmap(models.Model):
 	mapname = models.CharField(max_length=255, default='')
 	diffname = models.CharField(max_length=255, default='')
 	mode = models.CharField(choices=ModeChoice, max_length=10, default='None')
-	date = models.IntegerField(default=0)
+	date = models.CharField(max_length=20, default=0)
 
 	def __unicode__(self):
 		return '[Day:' + str(self.date) + ']' + self.mapname + '[' + self.diffname + ']'
@@ -99,7 +99,7 @@ class Beatmap(models.Model):
 
 class Match(models.Model):
 	mpid = models.IntegerField()
-	date = models.IntegerField()  # 人工输入，1-3，统计时取相同号的前6个
+	date = models.CharField(max_length=20)  # 人工输入，1-3，统计时取相同号的前6个
 	time = models.IntegerField()  # 人工输入，1-4
 
 	def __unicode__(self):

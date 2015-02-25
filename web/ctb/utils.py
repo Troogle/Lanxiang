@@ -1,6 +1,8 @@
+from collections import OrderedDict
 from hashlib import sha1 as sha_constructor
 import random
 import json
+from ctb.models import Beatmap
 
 from .models import *
 
@@ -70,3 +72,17 @@ def addmatch(mpid, match):
 			score = play['score']
 			failed = False if play['pass'] == '1' else True
 			Play.objects.create(player=cplayer, round=cround, score=score, failed=failed)
+
+
+def PackMapData(date):
+	data = {'date': date, 'maps': OrderedDict()}
+	if Beatmap.objects.filter(date=date).count() == 0:
+		return data
+	data['maps']['None'] = []
+	data['maps']['HD'] = []
+	data['maps']['DT'] = []
+	data['maps']['HR'] = []
+	data['maps']['Free Mod'] = []
+	for map in Beatmap.objects.filter(date=date):
+		data['maps'][map.mode].append(map)
+	return data

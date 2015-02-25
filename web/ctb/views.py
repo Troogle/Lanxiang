@@ -1,10 +1,8 @@
 ﻿# Create your views here.
 from datetime import datetime
 import re
-from collections import OrderedDict
 
 from django.contrib.auth.decorators import login_required
-
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .utils import *
@@ -22,19 +20,14 @@ def rules(request):
 
 def pool(request):
 	maplist = []
+	data = PackMapData('淘汰赛')
+	maplist.append(data)
+	data = PackMapData('小组赛')
+	maplist.append(data)
 	timedelta = (datetime.now() - datetime(year=2015, month=2, day=19)).days
-	timedelta = min(timedelta, 5)
+	timedelta = min(timedelta, 3)
 	for date in range(timedelta, 0, -1):
-		if Beatmap.objects.filter(date=date).count() == 0:
-			continue
-		data = {'date': date, 'maps': OrderedDict()}
-		data['maps']['None'] = []
-		data['maps']['HD'] = []
-		data['maps']['DT'] = []
-		data['maps']['HR'] = []
-		data['maps']['Free Mod'] = []
-		for map in Beatmap.objects.filter(date=date):
-			data['maps'][map.mode].append(map)
+		data = PackMapData(date)
 		maplist.append(data)
 	return render(request, 'pool.html', {'option': 1, 'list': maplist})
 
