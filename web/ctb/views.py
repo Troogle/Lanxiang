@@ -21,7 +21,7 @@ def rules(request):
 
 def pool(request):
 	maplist = []
-	if datetime.now() > datetime(year=2015, month=2, day=27):
+	if datetime.now() > datetime(year=2015, month=3, day=1):
 		data = PackMapData('决赛')
 		maplist.append(data)
 		return render(request, 'pool.html', {'option': 1, 'list': maplist})
@@ -39,7 +39,7 @@ def pool(request):
 
 def poolall(request):
 	maplist = []
-	if datetime.now() > datetime(year=2015, month=2, day=27):
+	if datetime.now() > datetime(year=2015, month=2, day=28):
 		data = PackMapData('决赛')
 		maplist.append(data)
 	if datetime.now() > datetime(year=2015, month=2, day=26):
