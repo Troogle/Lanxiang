@@ -21,7 +21,7 @@ class Play(models.Model):
 	@property
 	def point(self):
 		if self.team:
-			return 1 if self.useful else 0
+			return 3 if self.useful else 0
 		return float(self.score) / float(self.round.map.maxscore) \
 			if not self.failed else float(self.score) / float(2 * self.round.map.maxscore)
 
@@ -80,7 +80,7 @@ class MatchUser(models.Model):
 
 	@property
 	def pointT(self):
-		return self.getpoint('淘汰赛')
+		return self.getpoint('淘汰赛')+self.getpoint('补分赛')
 
 	@property
 	def pointF(self):

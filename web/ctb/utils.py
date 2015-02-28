@@ -64,6 +64,10 @@ def addmatch(mpid, match):
 			continue
 		cround = Round.objects.create(match=match, map=cmap, order=order)
 		order += 1
+		score = {}
+		if round["team_type"] == '2':
+			score[1] = 0
+			score[2] = 0
 		for play in round['scores']:
 			cplayer = get_object_or_none(MatchUser, osuid=play['user_id'])
 			if cplayer is None:
@@ -71,7 +75,13 @@ def addmatch(mpid, match):
 			score = play['score']
 			team = play['team']
 			failed = False if play['pass'] == '1' else True
-			Play.objects.create(player=cplayer, round=cround, score=score, failed=failed, team=team)
+			cplay = Play.objects.create(player=cplayer, round=cround, score=score, failed=failed, team=team)
+			if round["team_type"] == '2':
+				score[cplay.team] += cplay.score
+		if score[1] > score[2]:
+			Play.objects.filter(round__exact=cround, team=1).update(useful=True)
+		else:
+			Play.objects.filter(round__exact=cround, team=2).update(useful=True)
 
 
 def PackMapData(date):
