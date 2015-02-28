@@ -80,7 +80,7 @@ def matchlist(request):
 
 
 def matchlistold(request):
-	match = Match.objects.exclude(Q(date='淘汰赛') | Q(date='决赛'))
+	match = Match.objects.exclude(Q(date='淘汰赛') | Q(date='决赛') | Q(date='补分赛'))
 	return render(request, 'matchlist.html', {'option': 5, 'list': match})
 
 

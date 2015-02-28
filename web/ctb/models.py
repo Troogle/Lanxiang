@@ -6,7 +6,7 @@ from django.db import models
 class Play(models.Model):
 	player = models.ForeignKey('MatchUser')
 	round = models.ForeignKey('Round', null=True)
-	score = models.IntegerField()
+	score = models.IntegerField(default=0)
 	failed = models.BooleanField(default=False)
 	useful = models.BooleanField(default=False)
 	team = models.IntegerField(default=0)
@@ -33,7 +33,7 @@ class MatchUser(models.Model):
 	osuid = models.IntegerField()
 	username = models.CharField(max_length=30)
 	checked = models.BooleanField(default=False)
-	userType = models.IntegerField()
+	userType = models.IntegerField(default=0)
 	team = models.IntegerField(default=-1)
 
 	def __unicode__(self):
