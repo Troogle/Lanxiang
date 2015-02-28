@@ -94,11 +94,12 @@ def matchlistadd(request):
 		addmatch(mpid, match)
 		if request.POST.get('group'):
 			team = request.POST.get('teamwin')
+			wteam=-1
 			if team == "Blue":
-				team = "1"
+				wteam = "1"
 			elif team == "Red":
-				team = "2"
-			plays = Play.objects.filter(round__match__date__exact=date, team=team)
+				wteam = "2"
+			plays = Play.objects.filter(round__match__date__exact=date, team=wteam)
 			plays.update(useful=True)
 		else:
 			for user in MatchUser.objects.all():

@@ -12,7 +12,7 @@ class Play(models.Model):
 	team = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return str(self.round) + " " + str(self.player)
+		return unicode(self.round) + " " + str(self.player)
 
 	def useit(self):
 		self.useful = True
@@ -136,7 +136,7 @@ class Round(models.Model):
 	order = models.IntegerField(default=0)
 
 	def __unicode__(self):
-		return str(self.match) + '#' + str(self.order)
+		return unicode(self.match) + '#' + str(self.order)
 
 	class Meta:
 		ordering = ['order']
