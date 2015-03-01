@@ -75,7 +75,7 @@ def beatmapedit(request):
 
 
 def matchlist(request):
-	match = Match.objects.filter(Q(date='决赛') | Q(date='淘汰赛'))
+	match = Match.objects.filter(Q(date='决赛') | Q(date='淘汰赛')).order_by('date', '-time')
 	return render(request, 'matchlist.html', {'option': 5, 'list': match})
 
 
